@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.Bsystem.Dscatalog.dto.CategoryDTO;
 import com.Bsystem.Dscatalog.entities.CategoryEntity;
-import com.Bsystem.Dscatalog.exceptions.NotFoundException;
+import com.Bsystem.Dscatalog.exceptions.EntityNotFoundException;
 import com.Bsystem.Dscatalog.repository.CategoryRepository;
 
 @Service
@@ -24,7 +24,7 @@ public class CategoryService {
 
 	public CategoryDTO findById(Long id) {
 		CategoryEntity entity = categoryRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Categoria não encotrada!"));
+				.orElseThrow(() -> new EntityNotFoundException("Categoria não encotrada!"));
 		return new CategoryDTO(entity);
 	}
 
