@@ -28,4 +28,22 @@ public class CategoryService {
 		return new CategoryDTO(entity);
 	}
 
+	public CategoryDTO insert(CategoryDTO dto) {
+		CategoryEntity entity = categoryRepository.save(this.prepareEntity(dto));
+		return new CategoryDTO(entity);
+	}
+
+	private CategoryEntity prepareEntity(CategoryDTO dto) {
+        return CategoryEntity
+                .builder()
+                .name(dto.getName())
+                .build();
+    }
+
+	public CategoryDTO updateCategory(Long id, CategoryDTO dto) {
+		CategoryEntity entity = categoryRepository.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException("Categoria não encotrada!"));
+		entity.setName(dto.getName());	
+		return new CategoryDTO(categoryRepository.save(entity));
+	}
 }
